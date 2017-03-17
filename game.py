@@ -1,7 +1,7 @@
 
 import random
 
-# Store these separately for easy of editing
+# Store these separately for ease of editing
 # And our tests can use these for comparison
 low = 'too low'
 high = 'too high'
