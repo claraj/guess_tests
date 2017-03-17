@@ -28,18 +28,20 @@ class TestGuessingGame(TestCase):
         self.assertEqual(game.high, game.compare(5, 7))
         self.assertEqual(game.low, game.compare(5, 3))
 
-
+        
+    # A test for an example game. Force a secret number, and provide some example guesses.
     @patch('game.make_secret_number', side_effect=[4])
     @patch('builtins.input', side_effect=[0,10,5,3,4]) # Too low, too high, too high, too low, just right
     @patch('builtins.print')
     def test_game(self, mock_print, mock_input, mock_secret):
         game.main()
 
+        # A list of the things we expect print() to print
         expected_print = [ game.low, game.high, game.high, game.low, game.correct];
+        # Turn these into call objects. List comprehensions are one of my favorite things! Use one list to create another. 
         calls = [ call(out) for out in expected_print ]
-
-        # Examine the calls made to mock_print and assert they are as expected
-
+        
+        # Examine the calls made to mock_print and assert they are the calls expected
         mock_print.assert_has_calls(calls)
 
 
